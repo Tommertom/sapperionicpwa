@@ -1,3 +1,104 @@
+<script>
+  import {
+    stuff,
+    presentToast,
+    presentPopover,
+    presentIonicActionSheet,
+    IonicMenuController
+  } from "./../services/Ionic.js";
+
+  import { register } from "svelte-custom-elements";
+
+  import Test from "../components/Test.svelte";
+  register("popover-message", Test, []);
+
+  console.log("STUFF", stuff, presentIonicActionSheet);
+
+  setTimeout(() => {
+    chipClick();
+  }, 3000);
+  const chipClick = () => {
+    console.log("CHIPclick");
+
+    /*
+   const menuCtrl = IonicMenuController();
+
+    menuCtrl.enable(true, "first");
+    menuCtrl.open("first");
+   
+*/
+    console.log("gett toast2");
+
+    const toast = presentToast({
+      buttons: [
+        {
+          side: "start",
+          icon: "star",
+          text: "Favorite",
+          handler: () => {
+            console.log("Favorite clicked");
+          }
+        },
+        {
+          text: "Done",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          }
+        }
+      ],
+      header: "Header",
+      position: "top"
+    });
+
+    const actionSheet = presentIonicActionSheet({
+      header: "Stuff",
+      buttons: [
+        {
+          text: "Delete",
+          role: "destructive",
+          icon: "trash",
+          handler: () => {
+            console.log("Delete clicked");
+          }
+        },
+        {
+          text: "Share",
+          icon: "share",
+          handler: () => {
+            console.log("Share clicked");
+          }
+        },
+        {
+          text: "Play (open modal)",
+          icon: "arrow-dropright-circle",
+          handler: () => {
+            console.log("Play clicked");
+          }
+        },
+        {
+          text: "Favorite",
+          icon: "heart",
+          handler: () => {
+            console.log("Favorite clicked");
+          }
+        },
+        {
+          text: "Cancel",
+          icon: "close",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          }
+        }
+      ]
+    });
+
+    // const modal = presentModal({ component: "popover-message" })
+    //  const popover = presentPopover({ component: "popover-message" });
+  };
+</script>
+
 <style>
   h1,
   figure,
@@ -44,9 +145,14 @@
     <ion-buttons slot="start">asdsad</ion-buttons>
   </ion-toolbar>
 </ion-header>
-https://github.com/sveltejs/svelte-custom-elements
+
+<Test />
+
+<ion-icon name="add" />
+ss https://github.com/sveltejs/svelte-custom-elements
 <h1>Great success!</h1>
-<ion-chip>sdasd</ion-chip>
+<ion-chip on:click={chipClick}>sdasd</ion-chip>
+
 <figure>
   <img alt="Borat" src="great-success.png" />
   <figcaption>HIGH FIVE!</figcaption>
